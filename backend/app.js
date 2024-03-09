@@ -2,15 +2,17 @@ const express=require('express');
 const cors=require('cors');
 const app=express();
 const seedDB = require('./seed');
-const mongoose=require('mongoose');
 const Routes=require('./routes/transactions');
-mongoose.connect('mongodb://127.0.0.1:27017/ExpenseTracker').then(()=>{
-    console.log("DB connected successfully")
-})
-.catch((err)=>{
-    console.log("DB error"); 
-    console.log(err)
-})
+const mongoose = require('mongoose');
+const mongoURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/ExpenseTracker';
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log("DB connected successfully");
+  })
+  .catch((err) => {
+    console.error("DB connection error:", err);
+  });
+
 app.get('/home',(req,res)=>{
     res.status(200).json({msg:"Backend connected"});
 })
