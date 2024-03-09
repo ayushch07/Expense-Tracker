@@ -14,7 +14,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/ExpenseTracker').then(()=>{
 app.get('/home',(req,res)=>{
     res.status(200).json({msg:"Backend connected"});
 })
-seedDB();
+// seedDB();
 app.use(express.urlencoded({extended:true}));
 app.use(express.json())//to convert the request data to json format
 app.use(cors())//to connect react with backend
